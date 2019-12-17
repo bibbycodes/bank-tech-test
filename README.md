@@ -29,7 +29,7 @@ This Prints a formatted statement to the console:
 
 ![Output](./img.png?raw=true "Title")
 
-## Apporach:
+## Approach:
 
 I first started with a Bank class.
 I used Tests to drive the development.
