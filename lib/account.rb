@@ -23,32 +23,32 @@
 class Account
   def initialize
     @balance = 0
-    @transactions = []
+    @ledger = []
   end
 
-  def withdraw_at(date, amount)
-    balance = self.make_withdrawal(amount)
-    transaction =  {
-      "date" => date,
-      "amount" => amount,
-      "total" => @balance,
-      "type" => "withdrawal"
-    }
-    @transactions.push(transaction)
-    transaction
-  end
+  # def withdraw_at(date, amount)
+  #   balance = self.make_withdrawal(amount)
+  #   transaction =  {
+  #     "date" => date,
+  #     "amount" => amount,
+  #     "total" => @balance,
+  #     "type" => "withdrawal"
+  #   }
+  #   @ledger.push(transaction)
+  #   transaction
+  # end
 
-  def deposit_at(date, amount)
-    balance = self.add_deposit(amount)
-    transaction =  {
-      "date" => date,
-      "amount" => amount,
-      "total" => @balance,
-      "type" => "deposit"
-    }
-    @transactions.push(transaction)
-    transaction
-  end
+  # def deposit_at(date, amount)
+  #   balance = self.add_deposit(amount)
+  #   transaction =  {
+  #     "date" => date,
+  #     "amount" => amount,
+  #     "total" => @balance,
+  #     "type" => "deposit"
+  #   }
+  #   @ledger.push(transaction)
+  #   transaction
+  # end
 
   def make_headers
     "date || credit || debit || balance"
@@ -62,28 +62,28 @@ class Account
     end
   end
 
-  def add_deposit(amount)
-    @balance += amount
-    amount
-  end
-
-  def make_withdrawal(amount)
-    @balance -= amount
-    amount
+  def add_transaction(transaction)
+    if transaction.type == "deposit"
+      @balance += transaction.amount
+    else
+      @balance -= transaction.amount
+    end
+    @ledger.push(transaction)
+    return transaction
   end
 
   def get_total
     return @balance
   end
 
-  def get_transactions
-    @transactions
+  def get_ledger
+    @ledger
   end
 
   def return_statement
     headers = self.make_headers
     transactions_string = ""
-    @transactions.each do |transaction|
+    @ledger.each do |transaction|
       transaction = format_output(transaction)
       transactions_string += (transaction + "\n")
     end

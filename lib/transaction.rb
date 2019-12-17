@@ -5,6 +5,8 @@ class Transaction
     @type = type
   end
 
+  # do we need this?
+
   def make_hash
     return {
       "date" => @date,
