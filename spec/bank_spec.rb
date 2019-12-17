@@ -127,30 +127,30 @@ describe Bank do
     end
     it "formats a string for a deposit of 500 at 01/01/2020" do
       deposit = @bank_5.deposit_at("01/01/2020", 500)
-      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || 500 || || 500")
+      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || 500.00 || || 500.00")
     end
 
     it "formats a string for a deposit of 1000 at 03/01/2020" do
       deposit = @bank_5.deposit_at("03/01/2020", 1000)
-      expect(@bank_5.format_output(deposit)).to eq("03/01/2020 || 1000 || || 1000")
+      expect(@bank_5.format_output(deposit)).to eq("03/01/2020 || 1000.00 || || 1000.00")
     end
 
     it "formats a string for a deposit of 1000 at 03/01/2020 when there is already 1000 in the account" do
       @bank_5.deposit_at("02/01/2020", 1000)
       deposit = @bank_5.deposit_at("03/01/2020", 1000)
-      expect(@bank_5.format_output(deposit)).to eq("03/01/2020 || 1000 || || 2000")
+      expect(@bank_5.format_output(deposit)).to eq("03/01/2020 || 1000.00 || || 2000.00")
     end
 
     it "formats a string for a withdrawal of 500 at 01/01/2020 for an account with 1000 inside" do
       @bank_5.add_deposit(1000)
       deposit = @bank_5.withdraw_at("01/01/2020", 500)
-      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || || 500 || 500")
+      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || || 500.00 || 500.00")
     end
 
     it "formats a string for a withdrawal of 500 at 01/01/2020 for an account with 2000 inside" do
       @bank_5.add_deposit(2000)
       deposit = @bank_5.withdraw_at("01/01/2020", 500)
-      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || || 500 || 1500")
+      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || || 500.00 || 1500.00")
     end
   end
 
@@ -163,6 +163,20 @@ describe Bank do
       deposit = @bank.deposit_at("01/01/2020", 2000)
       withdrawal = @bank.withdraw_at("02/01/2020", 1000)
       expect(@bank.get_transactions).to eq([deposit, withdrawal])
+    end
+  end
+
+  context "#return_statement" do
+    it 'returns
+        date || credit || debit || balance
+        10/01/2012 || 1000.00 || || 1000.00
+
+        when one deposit of 1000 has been made into an empty account
+        ' do
+      @bank.deposit_at("10/10/2012", 1000)
+      expect(@bank.return_statement).to eq(
+        "date || credit || debit || balance\n10/10/2012 || 1000.00 || || 1000.00"
+      )
     end
   end
 end

@@ -56,9 +56,9 @@ class Bank
 
   def format_output(activity)
     if activity["type"] == "deposit"
-      "#{activity["date"]} || #{activity["amount"]} || || #{@total}"
+      "#{activity["date"]} || #{sprintf('%.2f', activity["amount"])} || || #{sprintf('%.2f', @total)}"
     else
-      "#{activity["date"]} || || #{activity["amount"]} || #{@total}"
+      "#{activity["date"]} || || #{sprintf('%.2f', activity["amount"])} || #{sprintf('%.2f', @total)}"
     end
   end
 
@@ -78,5 +78,15 @@ class Bank
 
   def get_transactions
     @transactions
+  end
+
+  def return_statement
+    headers = self.make_headers
+    transactions_string = ""
+    @transactions.each do |transaction|
+      transaction = format_output(transaction)
+      transactions_string += (transaction + "\n")
+    end
+    return headers + "\n" + transactions_string[0...-1]
   end
 end
