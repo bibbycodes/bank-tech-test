@@ -1,4 +1,4 @@
-require 'bank'
+require 'account'
 
 # You should be able to interact with your code via a REPL like IRB or the JavaScript console. 
 # (You don't need to implement a command line interface that takes input from STDIN.)
@@ -22,9 +22,11 @@ require 'bank'
 # 13/01/2012 || 2000.00 || || 1000.00
 # 10/01/2012 || 1000.00 || || 1000.00
 
-describe Bank do
+# let(:deposit) { Transaction.new(message: 'Hello,\r\nworld', created_at: '2019-12-12 11:53:11.7426', updated_at: '2019-12-12 11:53:11.7426') }
+
+describe Account do
   before(:each) do
-    @bank = Bank.new
+    @bank = described_class.new
   end
     
   context "#makeHeaders" do
@@ -44,7 +46,7 @@ describe Bank do
   end
 
   context "#get_total" do
-    bank_2 = Bank.new
+    bank_2 = described_class.new
     it "returns 0 when nothing has been deposited" do
       expect(bank_2.get_total).to eq(0)
     end
@@ -62,7 +64,7 @@ describe Bank do
 
   context "#make_withdrawal" do
     before(:each) do
-      @bank_3 = Bank.new
+      @bank_3 = described_class.new
       @bank_3.add_deposit(1000)
     end
 
@@ -77,7 +79,7 @@ describe Bank do
 
   context "#withdraw_at" do
     before(:each) do
-      @bank_4 = Bank.new
+      @bank_4 = described_class.new
       @bank_4.add_deposit(4000)
     end
 
@@ -123,7 +125,7 @@ describe Bank do
 
   context "#format_output" do
     before(:each) do
-      @bank_5 = Bank.new
+      @bank_5 = described_class.new
     end
     it "formats a string for a deposit of 500 at 01/01/2020" do
       deposit = @bank_5.deposit_at("01/01/2020", 500)

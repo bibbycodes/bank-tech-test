@@ -20,9 +20,9 @@
 # 13/01/2012 || 2000.00 || || 3000.00
 # 10/01/2012 || 1000.00 || || 1000.00
 
-class Bank
+class Account
   def initialize
-    @total = 0
+    @balance = 0
     @transactions = []
   end
 
@@ -31,7 +31,7 @@ class Bank
     transaction =  {
       "date" => date,
       "amount" => amount,
-      "total" => @total,
+      "total" => @balance,
       "type" => "withdrawal"
     }
     @transactions.push(transaction)
@@ -43,7 +43,7 @@ class Bank
     transaction =  {
       "date" => date,
       "amount" => amount,
-      "total" => @total,
+      "total" => @balance,
       "type" => "deposit"
     }
     @transactions.push(transaction)
@@ -56,24 +56,24 @@ class Bank
 
   def format_output(activity)
     if activity["type"] == "deposit"
-      "#{activity["date"]} || #{sprintf('%.2f', activity["amount"])} || || #{sprintf('%.2f', @total)}"
+      "#{activity["date"]} || #{sprintf('%.2f', activity["amount"])} || || #{sprintf('%.2f', @balance)}"
     else
-      "#{activity["date"]} || || #{sprintf('%.2f', activity["amount"])} || #{sprintf('%.2f', @total)}"
+      "#{activity["date"]} || || #{sprintf('%.2f', activity["amount"])} || #{sprintf('%.2f', @balance)}"
     end
   end
 
   def add_deposit(amount)
-    @total += amount
+    @balance += amount
     amount
   end
 
   def make_withdrawal(amount)
-    @total -= amount
+    @balance -= amount
     amount
   end
 
   def get_total
-    return @total
+    return @balance
   end
 
   def get_transactions
