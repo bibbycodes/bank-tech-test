@@ -26,34 +26,6 @@ class Account
     @ledger = []
   end
 
-  # def withdraw_at(date, amount)
-  #   balance = self.make_withdrawal(amount)
-  #   transaction =  {
-  #     "date" => date,
-  #     "amount" => amount,
-  #     "total" => @balance,
-  #     "type" => "withdrawal"
-  #   }
-  #   @ledger.push(transaction)
-  #   transaction
-  # end
-
-  # def deposit_at(date, amount)
-  #   balance = self.add_deposit(amount)
-  #   transaction =  {
-  #     "date" => date,
-  #     "amount" => amount,
-  #     "total" => @balance,
-  #     "type" => "deposit"
-  #   }
-  #   @ledger.push(transaction)
-  #   transaction
-  # end
-
-  def make_headers
-    "date || credit || debit || balance"
-  end
-
   def format_output(transaction)
     if transaction["type"] == "deposit"
       "#{transaction["date"]} || #{sprintf('%.2f', transaction["amount"])} || || #{sprintf('%.2f', @balance)}"

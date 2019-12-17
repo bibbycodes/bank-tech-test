@@ -35,12 +35,6 @@ describe Account do
     @full_account = described_class.new
     4.times { @full_account.add_transaction(deposit) }
   end
-    
-  # context "#makeHeaders" do
-  #   it "returns date || credit || debit || balance" do
-  #     expect(@account.make_headers).to eq("date || credit || debit || balance")
-  #   end
-  # end
 
   context "#add_transaction" do
     it "adds a deposit to ledger" do
@@ -79,50 +73,17 @@ describe Account do
     end
   end
 
-  context "#format_output" do
-    before(:each) do
-      @account_5 = described_class.new
-    end
-    it "formats a string for a deposit of 500 at 01/01/2020" do
-      deposit = @account_5.deposit_at("01/01/2020", 500)
-      expect(@account_5.format_output(deposit)).to eq("01/01/2020 || 500.00 || || 500.00")
+  context "#get_ledger" do
+    it "returns an empty list when there are no transactions" do
+      expect(@account.get_ledger).to eq([])
     end
 
-  #   it "formats a string for a deposit of 1000 at 03/01/2020" do
-  #     deposit = @account_5.deposit_at("03/01/2020", 1000)
-  #     expect(@account_5.format_output(deposit)).to eq("03/01/2020 || 1000.00 || || 1000.00")
-  #   end
-
-  #   it "formats a string for a deposit of 1000 at 03/01/2020 when there is already 1000 in the account" do
-  #     @account_5.deposit_at("02/01/2020", 1000)
-  #     deposit = @account_5.deposit_at("03/01/2020", 1000)
-  #     expect(@account_5.format_output(deposit)).to eq("03/01/2020 || 1000.00 || || 2000.00")
-  #   end
-
-  #   it "formats a string for a withdrawal of 500 at 01/01/2020 for an account with 1000 inside" do
-  #     @account_5.add_transaction(1000)
-  #     deposit = @account_5.withdraw_at("01/01/2020", 500)
-  #     expect(@account_5.format_output(deposit)).to eq("01/01/2020 || || 500.00 || 500.00")
-  #   end
-
-  #   it "formats a string for a withdrawal of 500 at 01/01/2020 for an account with 2000 inside" do
-  #     @account_5.add_transaction(2000)
-  #     deposit = @account_5.withdraw_at("01/01/2020", 500)
-  #     expect(@account_5.format_output(deposit)).to eq("01/01/2020 || || 500.00 || 1500.00")
-  #   end
+    it "returns [deposit, withdrawal] when a deposit followed by a withdrawal has been made" do
+      @account.add_transaction(deposit)
+      @account.add_transaction(withdrawal)
+      expect(@account.get_ledger).to eq([deposit, withdrawal])
+    end
   end
-
-  # context "#get_transactions" do
-  #   it "returns an empty list when there are no transactions" do
-  #     expect(@account.get_transactions).to eq([])
-  #   end
-
-  #   it "returns a list of all transactions" do
-  #     deposit = @account.deposit_at("01/01/2020", 2000)
-  #     withdrawal = @account.withdraw_at("02/01/2020", 1000)
-  #     expect(@account.get_transactions).to eq([deposit, withdrawal])
-  #   end
-  # end
 
   # context "#return_statement" do
   #   it 'returns
