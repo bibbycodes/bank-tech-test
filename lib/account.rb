@@ -1,24 +1,21 @@
+# frozen_string_literal: true
+
+# Top level class
+
 class Account
+  attr_reader :balance, :ledger
   def initialize
     @balance = 0
     @ledger = []
   end
 
   def add_transaction(transaction)
-    if transaction.type == "deposit"
+    if transaction.type == 'deposit'
       @balance += transaction.amount
     else
       @balance -= transaction.amount
     end
     @ledger.push(transaction)
-    return transaction
-  end
-
-  def get_total
-    return @balance
-  end
-
-  def get_ledger
-    @ledger
+    transaction
   end
 end
