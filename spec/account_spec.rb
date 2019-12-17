@@ -45,15 +45,12 @@ describe Account do
   context "#add_transaction" do
     it "adds a deposit to ledger" do
       expect(@account.add_transaction(deposit)).to eq(deposit)
-      expect(@account.get_total).to eq(1000)
-      expect(@account.get_ledger).to eq([deposit])
     end
 
     it "adds a withdrawal to the ledger" do
       @account.add_transaction(deposit)
       @account.add_transaction(deposit)
       expect(@account.add_transaction(withdrawal)).to eq(withdrawal)
-      expect(@account.get_total).to eq(0)
     end
 
     it "adds a withdrawal to the ledger" do
@@ -75,75 +72,21 @@ describe Account do
       2.times { @empty_account.add_transaction(deposit) }
       expect(@empty_account.get_total).to eq(2000)
     end
+
+    it "returns 2000 when 2000 has been withdrawn from an account with 4000 inside" do
+      @full_account.add_transaction(withdrawal)
+      expect(@full_account.get_total).to eq(2000)
+    end
   end
 
-  # context "#make_withdrawal" do
-  #   before(:each) do
-  #     @account_3 = described_class.new
-  #     @account_3.add_transaction(1000)
-  #   end
-
-  
-
-  #   it "returns 200 when 800 is withdrawn" do
-  #     expect(@account_3.make_withdrawal(800)).to eq(800)
-  #   end
-  # end
-
-  # context "#withdraw_at" do
-  #   before(:each) do
-  #     @account_4 = described_class.new
-  #     @account_4.add_transaction(4000)
-  #   end
-
-  #   it "returns a hash with the traansaction details when a withdrawal of 500 is made on 01/01/2020 from an account with 4000 inside" do
-  #     expect(@account_4.withdraw_at("01/01/2020", 500)).to eq({
-  #       "date" => "01/01/2020",
-  #       "amount" => 500,
-  #       "total" => 3500,
-  #       "type" => "withdrawal"
-  #     })
-  #   end
-
-  #   it "returns a hash with the traansaction details when a withdrawal of 1000 is made on 01/01/2020 from an account with 4000 inside" do
-  #     expect(@account_4.withdraw_at("01/02/2020", 1000)).to eq({
-  #       "date" => "01/02/2020",
-  #       "amount" => 1000,
-  #       "total" => 3000,
-  #       "type" => "withdrawal"
-  #     })
-  #   end
-  # end
-
-  # context "#deposit_at" do
-  #   it "returns a hash with the traansaction details when a deposit of 1000 is made on 01/01/2020 into an empty account" do
-  #     expect(@account.deposit_at("01/01/2020", 1000)).to eq({
-  #       "date" => "01/01/2020",
-  #       "amount" => 1000,
-  #       "total" => 1000,
-  #       "type" => "deposit"
-  #     })
-  #   end
-
-  #   it "returns '[01/02/2020, 2000]' when a deposit of 1500 is made on 01/02/2020 into an account with 500 inside" do
-  #     @account.add_transaction(500)
-  #     expect(@account.deposit_at("01/02/2020", 1500)).to eq({
-  #       "date" => "01/02/2020",
-  #       "amount" => 1500,
-  #       "total" => 2000,
-  #       "type" => "deposit"
-  #     })
-  #   end
-  # end
-
-  # context "#format_output" do
-  #   before(:each) do
-  #     @account_5 = described_class.new
-  #   end
-  #   it "formats a string for a deposit of 500 at 01/01/2020" do
-  #     deposit = @account_5.deposit_at("01/01/2020", 500)
-  #     expect(@account_5.format_output(deposit)).to eq("01/01/2020 || 500.00 || || 500.00")
-  #   end
+  context "#format_output" do
+    before(:each) do
+      @account_5 = described_class.new
+    end
+    it "formats a string for a deposit of 500 at 01/01/2020" do
+      deposit = @account_5.deposit_at("01/01/2020", 500)
+      expect(@account_5.format_output(deposit)).to eq("01/01/2020 || 500.00 || || 500.00")
+    end
 
   #   it "formats a string for a deposit of 1000 at 03/01/2020" do
   #     deposit = @account_5.deposit_at("03/01/2020", 1000)
@@ -167,7 +110,7 @@ describe Account do
   #     deposit = @account_5.withdraw_at("01/01/2020", 500)
   #     expect(@account_5.format_output(deposit)).to eq("01/01/2020 || || 500.00 || 1500.00")
   #   end
-  # end
+  end
 
   # context "#get_transactions" do
   #   it "returns an empty list when there are no transactions" do

@@ -54,11 +54,11 @@ class Account
     "date || credit || debit || balance"
   end
 
-  def format_output(activity)
-    if activity["type"] == "deposit"
-      "#{activity["date"]} || #{sprintf('%.2f', activity["amount"])} || || #{sprintf('%.2f', @balance)}"
+  def format_output(transaction)
+    if transaction["type"] == "deposit"
+      "#{transaction["date"]} || #{sprintf('%.2f', transaction["amount"])} || || #{sprintf('%.2f', @balance)}"
     else
-      "#{activity["date"]} || || #{sprintf('%.2f', activity["amount"])} || #{sprintf('%.2f', @balance)}"
+      "#{transaction["date"]} || || #{sprintf('%.2f', transaction["amount"])} || #{sprintf('%.2f', @balance)}"
     end
   end
 
