@@ -25,4 +25,4 @@ print (statement.return_statement(account))
 ```
 
 This Prints a formatted statement to the console:
-
+![Output](relative/path/to/img.png?raw=true "Title")
