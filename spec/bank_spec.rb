@@ -141,5 +141,28 @@ describe Bank do
       expect(@bank_5.format_output(deposit)).to eq("03/01/2020 || 1000 || || 2000")
     end
 
+    it "formats a string for a withdrawal of 500 at 01/01/2020 for an account with 1000 inside" do
+      @bank_5.add_deposit(1000)
+      deposit = @bank_5.withdraw_at("01/01/2020", 500)
+      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || || 500 || 500")
+    end
+
+    it "formats a string for a withdrawal of 500 at 01/01/2020 for an account with 2000 inside" do
+      @bank_5.add_deposit(2000)
+      deposit = @bank_5.withdraw_at("01/01/2020", 500)
+      expect(@bank_5.format_output(deposit)).to eq("01/01/2020 || || 500 || 1500")
+    end
+  end
+
+  context "#get_transactions" do
+    it "returns an empty list when there are no transactions" do
+      expect(@bank.get_transactions).to eq([])
+    end
+
+    it "returns a list of all transactions" do
+      deposit = @bank.deposit_at("01/01/2020", 2000)
+      withdrawal = @bank.withdraw_at("02/01/2020", 1000)
+      expect(@bank.get_transactions).to eq([deposit, withdrawal])
+    end
   end
 end

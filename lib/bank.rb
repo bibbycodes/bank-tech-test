@@ -23,10 +23,8 @@
 class Bank
   def initialize
     @total = 0
+    @transactions = []
   end
-
-  #refactor output as hash
-  # return amount deposited/withdrawn
 
   def withdraw_at(date, amount)
     balance = self.make_withdrawal(amount)
@@ -36,6 +34,8 @@ class Bank
       "total" => @total,
       "type" => "withdrawal"
     }
+    @transactions.push(transaction)
+    transaction
   end
 
   def deposit_at(date, amount)
@@ -46,6 +46,8 @@ class Bank
       "total" => @total,
       "type" => "deposit"
     }
+    @transactions.push(transaction)
+    transaction
   end
 
   def make_headers
@@ -53,7 +55,11 @@ class Bank
   end
 
   def format_output(activity)
-    "#{activity["date"]} || #{activity["amount"]} || || #{@total}"
+    if activity["type"] == "deposit"
+      "#{activity["date"]} || #{activity["amount"]} || || #{@total}"
+    else
+      "#{activity["date"]} || || #{activity["amount"]} || #{@total}"
+    end
   end
 
   def add_deposit(amount)
@@ -68,5 +74,9 @@ class Bank
 
   def get_total
     return @total
+  end
+
+  def get_transactions
+    @transactions
   end
 end
