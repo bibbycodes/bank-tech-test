@@ -26,14 +26,6 @@ class Account
     @ledger = []
   end
 
-  def format_output(transaction)
-    if transaction["type"] == "deposit"
-      "#{transaction["date"]} || #{sprintf('%.2f', transaction["amount"])} || || #{sprintf('%.2f', @balance)}"
-    else
-      "#{transaction["date"]} || || #{sprintf('%.2f', transaction["amount"])} || #{sprintf('%.2f', @balance)}"
-    end
-  end
-
   def add_transaction(transaction)
     if transaction.type == "deposit"
       @balance += transaction.amount
@@ -50,15 +42,5 @@ class Account
 
   def get_ledger
     @ledger
-  end
-
-  def return_statement
-    headers = self.make_headers
-    transactions_string = ""
-    @ledger.each do |transaction|
-      transaction = format_output(transaction)
-      transactions_string += (transaction + "\n")
-    end
-    return headers + "\n" + transactions_string[0...-1]
   end
 end
