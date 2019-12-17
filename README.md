@@ -56,4 +56,4 @@ It has three methods. One that returns a formatted string representing a single 
 another to return the headers and a final method that takes in an account object as an argument and 
 returns a formatted, readable statement with the headers included.
 
-NB the code for the example above is contained withi example_script.rb
+NB the code for the example above is contained within example_script.rb
