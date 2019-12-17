@@ -36,6 +36,8 @@ I used Tests to drive the development.
 This inevitably led to the formation of three distinct classes as it 
 became apparent that certain methods did not match with the others.
 
+These methods were then extracted into the following classes:
+
 #### Transactions Class
 
 This is a simple class that takes in arguments for the date, amount and type 
