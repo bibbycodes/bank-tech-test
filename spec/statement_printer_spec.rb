@@ -33,15 +33,14 @@ describe StatementPrinter do
 
   context "#return_statement" do
     it 'returns
-
         date || credit || debit || balance
         10/01/2012 || 1000.00 || || 1000.00
 
         when one deposit of 1000 has been made into an empty account
         ' do
-      expect(@printer.return_statement(account)).to eq(
-        "date || credit || debit || balance\n10/10/2012 || 1000.00 || || 1000.00"
-      )
+            expect(@printer.return_statement(account)).to eq(
+              "date || credit || debit || balance\n10/10/2012 || 1000.00 || || 1000.00"
+            )
     end
   end
 end
