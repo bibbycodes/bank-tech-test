@@ -53,3 +53,5 @@ The final class has no attributes associated with it.
 It has three methods. One that returns a formmated string representing a single transaction, 
 another to return the headers and a final method that takes in an account object as an argument and 
 returns a formatted, readable statement with the headers included.
+
+NB the code for the example above is contained withi example_script.rb
