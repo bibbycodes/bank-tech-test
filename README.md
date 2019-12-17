@@ -20,7 +20,7 @@ account.add_transaction(withdrawal)
 Once you have some transactions in your account, you can print the statement using the StatementPrinter class:
 
 ```ruby
-statement = StatementPrinter.new
+statement = Statement.new
 
 print (statement.return_statement(account))
 ```
@@ -49,7 +49,7 @@ This is a class that has two attrributes: ledger and balance.
 It also contains one method for adding a transaction. Depending on the transaction type,
 the balance will be adjusted accordingly.
 
-#### StatementPrinter Class
+#### Statement Class
 
 The final class has no attributes associated with it.
 It has three methods. One that returns a formatted string representing a single transaction, 
