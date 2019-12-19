@@ -1,15 +1,17 @@
 ## Account Statement Printer
 This repository contains code for a simple Bank Account Statement Printer.
 #### Usage:
+Firstly, clone this repo.
+Run `bundle install`
 
-You can make a new transaction by using the Transaction class:
+You can create a new transaction by using the Transaction class:
 
 ```ruby
 deposit = Transaction.new('10/01/2019', 1000, 'deposit')
 withdrawal = Transaction.new('12/01/2019', 500, 'withdrawal')
 ```
 
-These transactions can then be added to an account by using the Account class:
+This transaction can then be added to an account by using the Account class:
 
 ```ruby
 account = Account.new
@@ -31,22 +33,21 @@ This Prints a formatted statement to the console:
 
 ## Approach:
 
-I first started with a Bank class.
-I used Tests to drive the development.
+I initially started with the Bank class, using Tests to drive development.
 This inevitably led to the formation of three distinct classes as it 
-became apparent that certain methods did not match with the others.
+became apparent that certain methods could be grouped together.
 
 These methods were then extracted into the following classes:
 
 #### Transactions Class
 
-This is a simple class that takes in arguments for the date, amount and type 
-of transaction and returns an object that represents a single transaction.
+This is a simple class that takes in arguments for the date, transaction amount and the type 
+of transaction. It returns an object that represents a single transaction.
 
 #### Account Class
 
 This is a class that has two attrributes: ledger and balance.
-It also contains one method for adding a transaction. Depending on the transaction type,
+It also contains a method for adding a transaction to the ledger. Depending on the transaction type,
 the balance will be adjusted accordingly.
 
 #### Statement Class
